@@ -8,4 +8,14 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <!--
+    CsvHelper: CSVファイルの読み書きを簡単にするためのライブラリです。
+    CommunityToolkit.Mvvm: MVVMパターンを実装するための便利なツールキットです。(RelayCommandなど)
+    以下のItemGroupをプロジェクトファイルに追加し、NuGetパッケージを復元してください。
+  -->
+  <ItemGroup>
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
+    <PackageReference Include="CsvHelper" Version="32.0.3" />
+  </ItemGroup>
+
 </Project>
