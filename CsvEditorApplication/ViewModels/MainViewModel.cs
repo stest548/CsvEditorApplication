@@ -67,7 +67,19 @@ namespace CsvEditorApplication.ViewModels
 
         public string StatusText => $"パス: {CurrentFilePath ?? "N/A"} | 行数: {DataTable.Rows.Count} | 列数: {DataTable.Columns.Count}";
 
-        public IList? SelectedItems { get; set; }
+        private IList? _selectedItems;
+        public IList? SelectedItems
+        {
+            get => _selectedItems;
+            set
+            {
+                if (SetProperty(ref _selectedItems, value))
+                {
+                    // プロパティの変更後、コマンドの実行可否を再評価するように強制する
+                    System.Windows.Input.CommandManager.InvalidateRequerySuggested();
+                }
+            }
+        }
 
         public ICommand NewFileCommand { get; }
         public ICommand OpenFileCommand { get; }

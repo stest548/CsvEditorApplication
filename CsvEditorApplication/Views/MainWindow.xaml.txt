@@ -4,7 +4,6 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CsvEditorApplication.Views"
-        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         mc:Ignorable="d"
         Title="{Binding WindowTitle}" Height="600" Width="800">
     <Grid>
@@ -41,7 +40,6 @@
         <!-- SelectedItemsはViewModelのSelectedItemsにバインド (複数行削除のため) -->
         <!-- パフォーマンス要件(N001)のためUI仮想化を有効化 -->
         <DataGrid Grid.Row="1" 
-                  x:Name="MyDataGrid"
                   ItemsSource="{Binding DataTable}"
                   AutoGenerateColumns="True"
                   CanUserAddRows="False"
@@ -49,16 +47,9 @@
                   EnableRowVirtualization="True" 
                   EnableColumnVirtualization="True"
                   d:ItemsSource="{d:SampleData ItemCount=5}">
-
-            <i:Interaction.Triggers>
-                <i:EventTrigger EventName="SelectionChanged">
-                    <i:ChangePropertyAction TargetObject="{Binding}" PropertyName="SelectedItems">
-                        <i:ChangePropertyAction.Value>
-                            <Binding ElementName="MyDataGrid" Path="SelectedItems"/>
-                        </i:ChangePropertyAction.Value>
-                    </i:ChangePropertyAction>
-                </i:EventTrigger>
-            </i:Interaction.Triggers>
+            <!-- 複数行選択をViewModelに渡すための添付プロパティを利用するヘルパークラスなどが必要になる場合があるが、 -->
+            <!-- ここでは簡略化のため、より高度なMVVMフレームワークの機能に依存するか、コードビハインドで処理することを想定 -->
+            <!-- 今回はMainViewModelのコンストラクタでSelectedItemsプロパティをセットアップ -->
         </DataGrid>
 
         <!-- U001-SCR-4.1.2.3: ステータスバー -->
